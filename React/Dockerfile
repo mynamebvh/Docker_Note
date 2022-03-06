@@ -14,10 +14,17 @@ RUN yarn build
 # Bundle static assets with nginx
 FROM nginx:1.21.0-alpine as production
 ENV NODE_ENV production
+
+RUN touch /var/run/nginx.pid && \
+    mkdir -p /var/cache/nginx && \
+    chown -R nginx:nginx /var/cache/nginx /var/run/nginx.pid
+
+USER nginx
 # Copy built assets from builder
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --chown=nginx:nginx --from=builder /app/build /usr/share/nginx/html
 # Add your nginx.conf
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --chown=nginx:nginx nginx.conf /etc/nginx/conf.d/default.conf
+
 # Expose port
 EXPOSE 80
 # Start nginx
