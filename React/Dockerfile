@@ -1,4 +1,6 @@
 FROM node:14-alpine AS builder
+LABEL maintainer="Hoang Bui <mynamebvh@gmail.com>"
+
 ENV NODE_ENV production
 # Add a work directory
 WORKDIR /app

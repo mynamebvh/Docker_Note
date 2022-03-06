@@ -1,6 +1,8 @@
 # Building the binary of the App
 FROM golang:1.16-alpine3.14 AS build
 
+LABEL maintainer="Hoang Bui <mynamebvh@gmail.com>"
+
 # `boilerplate` should be replaced with your project name
 WORKDIR /backend
 
