@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  backend:
+    build: .
+    image: backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/backend
+    networks:
+      - node-network
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+      - SA_PASSWORD=Hoangdzvch23
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+    volumes:
+      - dbdata:/var/opt/mssql
+    networks:
+      - node-network
+
+volumes:
+  dbdata:
+
+networks:
+  node-network:
+    driver: bridge
