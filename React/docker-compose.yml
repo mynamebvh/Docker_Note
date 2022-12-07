@@ -6,6 +6,5 @@ services:
     image: react-app
     build:
       context: .
-      target: production
     ports:
       - "3000:80"
